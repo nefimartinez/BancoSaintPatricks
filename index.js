@@ -3,4 +3,5 @@ const saludos = () => {
 }
 
 
+// con esta instruccion corremos la funcion
 saludos();
