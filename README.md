@@ -1,10 +1,10 @@
 # README
 
-Proyecto XXXXX
+Proyecto Banco Saint Patricks
 
 ### ¿Qué es este repositorio?
 
-- Repositorio para el proyecto XXXXX
+- Repositorio para el proyecto Banco Saint Patricks
 
 ### ¿Cómo lo configuro para levantarlo en Local?
 
