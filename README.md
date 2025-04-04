@@ -1,6 +1,6 @@
 # README
 
-Proyecto Banco Saint Patricks x
+Proyecto Banco Saint Patricks
 
 ### ¿Qué es este repositorio?
 

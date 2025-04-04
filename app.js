@@ -6,7 +6,10 @@ const helmet = require('helmet');
 const router = require('./routes');
 const bodyParser = require('body-parser');
 const config = require('./config/config');
+const { configPostgresDB } = require('./config/databases');
+const { handleDBPostgres, closePool } = require('./src/utils/handleDBPostgres');
 const cors = require('cors');
+const { handle } = require('express/lib/router');
 const loggerCNS = require('./src/utils/LoggerCNS').loggerCNS;
 
 const app = express();
@@ -34,11 +37,14 @@ async function serverStart() {
 }
 
 async function connectDB() {
-	// Create coneccion a db
+	// Create coneccion pool de la DB
+	await handleDBPostgres(configPostgresDB);
 }
 
 async function disconnectDB() {
-	// cierre de la coneccion a DB
+	// cierre de la coneccion pool de la DB
+	await closePool();
+	loggerCNS.info('Conexión a PostgreSQL cerrada en App.js');
 }
 
 async function cleanup() {
@@ -48,7 +54,7 @@ async function cleanup() {
 		process.exit(1);
 	} catch (error) {
 		loggerCNS.error(error);
-		process.exit(1);
+		process.exit(0);
 	}
 }
 
