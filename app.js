@@ -9,7 +9,6 @@ const config = require('./config/config');
 const { configPostgresDB } = require('./config/databases');
 const { handleDBPostgres, closePool } = require('./src/utils/handleDBPostgres');
 const cors = require('cors');
-const { handle } = require('express/lib/router');
 const loggerCNS = require('./src/utils/LoggerCNS').loggerCNS;
 
 const app = express();
