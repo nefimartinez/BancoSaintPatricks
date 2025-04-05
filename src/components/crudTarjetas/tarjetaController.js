@@ -8,16 +8,16 @@ const {
 	ERROR_INTERNAL,
 } = require('../../utils/constantes');
 
-const {	getAll } = require('./tarjetaModule');
+const {	getAllModule } = require('./tarjetaModule');
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 
 // servicio getAll
-const getAll = async (req, res) => {
+const getAllController = async (req, res) => {
 	logger.info('============================================');
 	logger.info('   Iniciando tarjetaController -> getAll()  ');
 	logger.info('============================================');
 	try {
-		const response = await getAll();
+		const response = await getAllModule();
 		if (response.err_code === -1) {
 			// NO-OK
 			res.status(response.statuscode || BAD_REQUEST).json({
@@ -42,5 +42,5 @@ const getAll = async (req, res) => {
 	}
 };
 module.exports = {
-    getAll
+    getAllController
 }

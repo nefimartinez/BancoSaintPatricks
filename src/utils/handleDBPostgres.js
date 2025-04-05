@@ -39,8 +39,9 @@ async function executeQuery(query, params = []) {
 		throw new Error('Pool de conexiones no inicializado');
 	}
 
+	let client;
 	try {
-		const client = await pool.connect();
+	 client = await pool.connect();
 		const result = await client.query(query, params);
 		return result;
 	} catch (error) {

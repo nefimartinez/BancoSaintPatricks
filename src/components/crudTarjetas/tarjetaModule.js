@@ -1,17 +1,17 @@
 'use strict';
 
-const { getAll } = require('./tarjetaService');
+const { getAllService } = require('./tarjetaService');
 const ModuleError = require('../../utils/moduleError');
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 const { INTERNAL_ERROR, NOT_FOUND } = require('../../utils/constantes');
 
 
-const getAll = async () => {
+const getAllModule = async () => {
 	logger.info('=============================================');
 	logger.info('     Iniciando tarjetaModule -> getAll()     ');
 	logger.info('=============================================');
 	try {
-		const response = await getAll();
+		const response = await getAllService();
 		return response;
 	} catch (error) {
 		if (error.statusCode) throw error; // error controlado
@@ -24,5 +24,5 @@ const getAll = async () => {
 };
 
 module.exports = {
-	getAll
+	getAllModule
 }
