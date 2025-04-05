@@ -7,8 +7,11 @@ const {
 	BAD_REQUEST,
 	ERROR_INTERNAL,
 } = require('../../utils/constantes');
+const {
+	crudUsuariosGetAllModule,
+	crudUsuariosAllByIdModule,
+} = require('./crudUsuariosModule');
 const logger = require('../../utils/LoggerCNS').loggerCNS;
-
 
 // servicio getAll
 module.exports.crudUsuariosGetAllController = async (req, res) => {
@@ -40,9 +43,6 @@ module.exports.crudUsuariosGetAllController = async (req, res) => {
 		});
 	}
 };
-
-
-
 
 // servicio getAllById
 module.exports.crudUsuariosGetAllByIdController = async (req, res) => {

@@ -1,30 +1,23 @@
 'use strict';
 
 const logger = require('../../utils/LoggerCNS').loggerCNS;
+const { executeQuery } = require('../../utils/handleDBPostgres');
+const ModuleError = require('../../utils/moduleError');
+const { INTERNAL_ERROR, SUCCESS, BAD_REQUEST } = require('../../utils/constantes');
 
-module.exports.listadoComunasServices = async () => {
-	logger.info('===================================');
-	logger.info('  Iniciando listadoComunasServices ');
-	logger.info('===================================');
+module.exports.crudUsuariosGetAllServices = async () => {
+	logger.info('=========================================');
+	logger.info('  Iniciando crudUsuariosGetAllServices   ');
+	logger.info('=========================================');
 	try {
 		let query = null;
 
-		logger.info('listado de Comunas para schema CNS');
-		query = `SELECT r.REGION
-		, r.DESCRIPCION DESCRIPCION_REGION
-		, ci.CIUDAD
-		, ci.DESCRIPCION DESCRIPCION_CIUDAD
-		, co.COMUNA
-		, co.DESCRIPCION DESCRIPCION_COMUNA  
-		FROM SISRVOWCNS.COMUNAS co, SISRVOWCNS.CIUDADES ci, SISRVOWCNS.REGIONES r 
-		WHERE R.REGION = co.REGION 
-		AND ci.CIUDAD = co.CIUDAD 
-		AND co.REGION = r.REGION 
-		ORDER BY REGION , ci.CIUDAD, co.COMUNA `;
+		logger.info(' crudUsuariosGetAllServices ');
+		query = `SELECT * FROM dbo.Comunas ORDER BY NombreComuna`; // ejemplo de consulta
 
-		return await executeSP(query, []);
+		return await executeQuery(query, []);
 	} catch (error) {
-		logger.error(' Error en listadoComunasServices: ', error);
+		logger.error(' Error en crudUsuariosGetAllServices: ', error);
 		throw error;
 	}
 };
