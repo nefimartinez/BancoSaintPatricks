@@ -4,12 +4,25 @@ const pg = require('pg');
 const logger = require('../utils/LoggerCNS').loggerCNS;
 const { configPostgresDB } = require('../../config/databases');
 
-let pool = null;
+// singletone pool de conexiones a PostgreSQL
+let pool = null; // Pool de conexiones a PostgreSQL
 
 async function handleDBPostgres() {
-	const { Pool } = pg;
+	// logg de configuración de la base de datos
+	logger.info('Configuración de la base de datos PostgreSQL:', {
+		host: configPostgresDB.host,
+		user: configPostgresDB.user,
+		database: configPostgresDB.database,
+		port: configPostgresDB.port,
+		schema: configPostgresDB.schema,
+	});
 
-	pool = new Pool({
+	// Verifica si el pool ya está inicializado
+	if (pool) {
+		logger.warn('Pool de conexiones ya inicializado');
+		return;
+	}
+	pool = new pg.Pool({
 		// Configuración de la conexión a PostgreSQL
 		host: configPostgresDB.host, // Host de PostgreSQL
 		user: configPostgresDB.user, // Usuario de PostgreSQL
@@ -25,6 +38,7 @@ async function handleDBPostgres() {
 	});
 
 	try {
+		logger.info('Conectando a PostgreSQL...');
 		await pool.connect();
 		logger.info('Conexión a PostgreSQL exitosa');
 	} catch (error) {
@@ -38,26 +52,27 @@ async function executeQuery(query, params = []) {
 		logger.error('Pool de conexiones no inicializado');
 		throw new Error('Pool de conexiones no inicializado');
 	}
-
 	let client;
 	try {
-	 client = await pool.connect();
+		client = await pool.connect(); // Obtiene un cliente del pool
 		const result = await client.query(query, params);
-		return result.rows;
+		return result.rows; // Devuelve las filas del resultado
 	} catch (error) {
 		logger.error('Error al ejecutar la consulta:', error);
 		throw error;
 	} finally {
 		if (client) {
-			client.release();
+			client.release(); // Libera el cliente de vuelta al pool
+			logger.info('Conexión liberada al pool');
 		}
 	}
 }
 
  function closePool() {
 	if (pool) {
-		 pool.end();
-		logger.info('Pool de conexiones cerrado');
+		pool.end();
+		pool = null; // Limpiar la referencia al pool
+		logger.info('Pool de conexiones cerrado...');
 	} else {
 		logger.warn('No hay pool de conexiones para cerrar');
 	}

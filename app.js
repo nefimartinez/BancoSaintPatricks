@@ -5,8 +5,6 @@ require('express-async-errors');
 const helmet = require('helmet');
 const router = require('./routes');
 const bodyParser = require('body-parser');
-const config = require('./config/config');
-
 const { handleDBPostgres, closePool } = require('./src/utils/handleDBPostgres');
 const cors = require('cors');
 const loggerCNS = require('./src/utils/LoggerCNS').loggerCNS;
@@ -39,6 +37,7 @@ async function serverStart() {
 async function connectDB() {
 	// Create coneccion pool de la DB
 	await handleDBPostgres();
+	loggerCNS.info('Conexión a PostgreSQL establecida en App.js');
 }
 
 async function disconnectDB() {

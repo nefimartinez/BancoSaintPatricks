@@ -34,8 +34,7 @@
 	"main": "index.js",
 	"author": "",
 	"license": "ISC",
-	"bugs": {
-		"url": ""
+	"bugs": {		
 	},
 	"homepage": "",
 	"devDependencies": {

@@ -16,14 +16,12 @@ function addEnvParam(paramName, required = false) {
 /* Constantes de variables de entorno */
 
 const config = {
-
 	// datos generales
 	version: addEnvParam('VERSION', true),
 	port: addEnvParam('PORT', true),
-	env: addEnvParam('ENV', true),	
-	REGION: addEnvParam('REGION', true),
-	
-	
+	env: addEnvParam('ENV', true),
+	region: addEnvParam('REGION', true),
+
 	// POSTGRES DB
 	POSTGRES_HOST: addEnvParam('POSTGRES_HOST', true),
 	POSTGRES_PORT: addEnvParam('POSTGRES_PORT', true),
@@ -33,6 +31,4 @@ const config = {
 	POSTGRES_SCHEMA: addEnvParam('POSTGRES_SCHEMA', true),
 };
 
-module.exports = {
-	config
-}
+module.exports = { config };
