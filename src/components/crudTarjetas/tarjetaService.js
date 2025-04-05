@@ -2,12 +2,11 @@
 
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 const { executeQuery } = require('../../utils/handleDBPostgres');
-const ModuleError = require('../../utils/moduleError');
 const { INTERNAL_ERROR, SUCCESS, BAD_REQUEST } = require('../../utils/constantes');
 
 const getAll = async () => {
 	logger.info('=========================================');
-	logger.info('  Iniciando getAll -> TarjetaService   ');
+	logger.info('  Iniciando getAll -> tarjetaService     ');
 	logger.info('=========================================');
 
     let query = null;
