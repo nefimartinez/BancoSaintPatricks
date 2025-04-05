@@ -2,20 +2,34 @@
 
 const pg = require('pg');
 const logger = require('../utils/LoggerCNS').loggerCNS;
+const { configPostgresDB } = require('../../config/databases');
 
-const pool = null;
+// singletone pool de conexiones a PostgreSQL
+let pool = null; // Pool de conexiones a PostgreSQL
 
-async function handleDBPostgres(configPostgresDB) {
-	const { Pool } = pg;
+async function handleDBPostgres() {
+	// logg de configuración de la base de datos
+	logger.info('Configuración de la base de datos PostgreSQL:', {
+		host: configPostgresDB.host,
+		user: configPostgresDB.user,
+		database: configPostgresDB.database,
+		port: configPostgresDB.port,
+		schema: configPostgresDB.schema,
+	});
 
-	pool = new Pool({
+	// Verifica si el pool ya está inicializado
+	if (pool) {
+		logger.warn('Pool de conexiones ya inicializado');
+		return;
+	}
+	pool = new pg.Pool({
 		// Configuración de la conexión a PostgreSQL
-		host: configPostgresDB.POSTGRES_HOST, // Host de PostgreSQL
-		user: configPostgresDB.POSTGRES_USER, // Usuario de PostgreSQL
-		database: configPostgresDB.POSTGRES_DATABASE, // Nombre de la base de datos
-		password: configPostgresDB.POSTGRES_PASSWORD, // Contraseña de PostgreSQL
-		schema: configPostgresDB.POSTGRES_SCHEMA, // Esquema de PostgreSQL
-		port: configPostgresDB.POSTGRES_PORT, // Puerto de PostgreSQL
+		host: configPostgresDB.host, // Host de PostgreSQL
+		user: configPostgresDB.user, // Usuario de PostgreSQL
+		database: configPostgresDB.database, // Nombre de la base de datos
+		password: configPostgresDB.password, // Contraseña de PostgreSQL
+		schema: configPostgresDB.schema, // Esquema de PostgreSQL
+		port: configPostgresDB.port, // Puerto de PostgreSQL
 		max: 20, // Conexiones máximas
 		min: 5, // Conexiones mínimas inactivas
 		idleTimeoutMillis: 30000, // 30 segundos
@@ -24,6 +38,7 @@ async function handleDBPostgres(configPostgresDB) {
 	});
 
 	try {
+		logger.info('Conectando a PostgreSQL...');
 		await pool.connect();
 		logger.info('Conexión a PostgreSQL exitosa');
 	} catch (error) {
@@ -37,25 +52,27 @@ async function executeQuery(query, params = []) {
 		logger.error('Pool de conexiones no inicializado');
 		throw new Error('Pool de conexiones no inicializado');
 	}
-
+	let client;
 	try {
-		const client = await pool.connect();
+		client = await pool.connect(); // Obtiene un cliente del pool
 		const result = await client.query(query, params);
-		return result;
+		return result.rows; // Devuelve las filas del resultado
 	} catch (error) {
 		logger.error('Error al ejecutar la consulta:', error);
 		throw error;
 	} finally {
 		if (client) {
-			client.release();
+			client.release(); // Libera el cliente de vuelta al pool
+			logger.info('Conexión liberada al pool');
 		}
 	}
 }
 
 async function closePool() {
 	if (pool) {
-		await pool.end();
-		logger.info('Pool de conexiones cerrado');
+		pool.end();
+		pool = null; // Limpiar la referencia al pool
+		logger.info('Pool de conexiones cerrado...');
 	} else {
 		logger.warn('No hay pool de conexiones para cerrar');
 	}

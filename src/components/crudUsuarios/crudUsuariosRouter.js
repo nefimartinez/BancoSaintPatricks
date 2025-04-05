@@ -8,7 +8,7 @@ const validateSchema = require('../../middlewares/validateSchemaHandler');
 const { listadoComunaSchema } = require('../../schemas/listadoComunasSchema'); // ruta de ejemplo
 
 // rutas Controllers
-const { listadoComunasController } = require('./listadoComunasController'); // ruta de ejemplo
+const { listadoComunasController } = require('../listadoComunas/listadoComunasController'); // ruta de ejemplo
 
 // rutas servicios Mantenedor TI
 const {

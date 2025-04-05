@@ -12,6 +12,7 @@
 		"log4js": "6.9.1",
 		"moment": "2.30.1",
 		"moment-timezone": "0.5.44",
+		"pg": "^8.14.1",
 		"swagger-autogen": "^2.22.0",
 		"swagger-ui-express": "^4.6.0",
 		"uuid": "^9.0.1"
@@ -33,8 +34,7 @@
 	"main": "index.js",
 	"author": "",
 	"license": "ISC",
-	"bugs": {
-		"url": ""
+	"bugs": {		
 	},
 	"homepage": "",
 	"devDependencies": {
