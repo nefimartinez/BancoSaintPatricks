@@ -4,13 +4,12 @@ let parameter = null;
 function addEnvParam(paramName, required = false) {
 	// Evaluación del parámetro
 	parameter = process.env[paramName];
-
 	if (!parameter) {
 		if (required)
 			throw new Error('No se definió la variable de entorno ' + paramName);
 		else return null;
 	}
-
+	
 	return parameter;
 }
 
@@ -34,4 +33,6 @@ const config = {
 	POSTGRES_SCHEMA: addEnvParam('POSTGRES_SCHEMA', true),
 };
 
-module.exports = config;
+module.exports = {
+	config
+}

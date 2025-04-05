@@ -2,20 +2,21 @@
 
 const pg = require('pg');
 const logger = require('../utils/LoggerCNS').loggerCNS;
+const { configPostgresDB } = require('../../config/databases');
 
-const pool = null;
+let pool = null;
 
-async function handleDBPostgres(configPostgresDB) {
+async function handleDBPostgres() {
 	const { Pool } = pg;
 
 	pool = new Pool({
 		// Configuración de la conexión a PostgreSQL
-		host: configPostgresDB.POSTGRES_HOST, // Host de PostgreSQL
-		user: configPostgresDB.POSTGRES_USER, // Usuario de PostgreSQL
-		database: configPostgresDB.POSTGRES_DATABASE, // Nombre de la base de datos
-		password: configPostgresDB.POSTGRES_PASSWORD, // Contraseña de PostgreSQL
-		schema: configPostgresDB.POSTGRES_SCHEMA, // Esquema de PostgreSQL
-		port: configPostgresDB.POSTGRES_PORT, // Puerto de PostgreSQL
+		host: configPostgresDB.host, // Host de PostgreSQL
+		user: configPostgresDB.user, // Usuario de PostgreSQL
+		database: configPostgresDB.database, // Nombre de la base de datos
+		password: configPostgresDB.password, // Contraseña de PostgreSQL
+		schema: configPostgresDB.schema, // Esquema de PostgreSQL
+		port: configPostgresDB.port, // Puerto de PostgreSQL
 		max: 20, // Conexiones máximas
 		min: 5, // Conexiones mínimas inactivas
 		idleTimeoutMillis: 30000, // 30 segundos

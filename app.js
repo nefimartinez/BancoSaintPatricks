@@ -6,12 +6,13 @@ const helmet = require('helmet');
 const router = require('./routes');
 const bodyParser = require('body-parser');
 const config = require('./config/config');
-const { configPostgresDB } = require('./config/databases');
+
 const { handleDBPostgres, closePool } = require('./src/utils/handleDBPostgres');
 const cors = require('cors');
 const loggerCNS = require('./src/utils/LoggerCNS').loggerCNS;
 
 const app = express();
+
 
 async function serverStart() {
 	try {
@@ -37,7 +38,7 @@ async function serverStart() {
 
 async function connectDB() {
 	// Create coneccion pool de la DB
-	await handleDBPostgres(configPostgresDB);
+	await handleDBPostgres();
 }
 
 async function disconnectDB() {

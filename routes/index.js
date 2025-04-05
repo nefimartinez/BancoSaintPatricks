@@ -5,7 +5,7 @@ const express = require('express');
 const listadoComunasRouter = require('../src/components/listadoComunas/listadoComunasRouter');
 
 // rutas 
-const crudUsuariosRouter = require('../src/components/crudUsuarios/crudUsuariosRouter');
+const crudUsuariosRouter = require('../src/components/crudUsuarios/crudusuariosRouter');
 
 
 function routerApi(app) {
