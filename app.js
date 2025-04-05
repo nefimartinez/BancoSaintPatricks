@@ -11,6 +11,7 @@ const loggerCNS = require('./src/utils/LoggerCNS').loggerCNS;
 
 const app = express();
 
+
 async function serverStart() {
 	try {
 		app.use(bodyParser.json());

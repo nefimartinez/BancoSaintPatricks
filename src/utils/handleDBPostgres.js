@@ -68,7 +68,7 @@ async function executeQuery(query, params = []) {
 	}
 }
 
-async function closePool() {
+ function closePool() {
 	if (pool) {
 		pool.end();
 		pool = null; // Limpiar la referencia al pool
