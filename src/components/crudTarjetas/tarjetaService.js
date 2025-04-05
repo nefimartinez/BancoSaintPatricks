@@ -6,7 +6,7 @@ const { INTERNAL_ERROR, SUCCESS, BAD_REQUEST } = require('../../utils/constantes
 
 const getAll = async () => {
 	logger.info('=========================================');
-	logger.info('  Iniciando getAll -> tarjetaService     ');
+	logger.info('  Iniciando tarjetaService -> getAll()   ');
 	logger.info('=========================================');
 
     let query = null;
@@ -16,7 +16,7 @@ const getAll = async () => {
 		return await executeQuery(query, []);
 
 	} catch (error) {
-		logger.error(' Error en getAll() -> tarjetaService: ', error);
+		logger.error(' Error en tarjetaService -> getAll(): ', error);
 		throw error;
 	}
 };
