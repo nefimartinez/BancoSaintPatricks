@@ -3,7 +3,11 @@
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 const { executeQuery } = require('../../utils/handleDBPostgres');
 const ModuleError = require('../../utils/moduleError');
-const { INTERNAL_ERROR, SUCCESS, BAD_REQUEST } = require('../../utils/constantes');
+const {
+	INTERNAL_ERROR,
+	SUCCESS,
+	BAD_REQUEST,
+} = require('../../utils/constantes');
 
 module.exports.crudUsuariosGetAllServices = async () => {
 	logger.info('=========================================');
@@ -13,7 +17,7 @@ module.exports.crudUsuariosGetAllServices = async () => {
 		let query = null;
 
 		logger.info(' crudUsuariosGetAllServices ');
-		query = `SELECT * FROM dbo.Comunas ORDER BY NombreComuna`; // ejemplo de consulta
+		query = `SELECT * FROM "bancoDB"."user";`;
 
 		return await executeQuery(query, []);
 	} catch (error) {

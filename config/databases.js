@@ -7,7 +7,7 @@ const configPostgresDB = {
 	user: config.POSTGRES_USER,
 	database: config.POSTGRES_DATABASE,
 	password: config.POSTGRES_PASSWORD,
-    schema: config.POSTGRES_SCHEMA,
+	schema: config.POSTGRES_SCHEMA,
 	port: config.POSTGRES_PORT,
 };
 
