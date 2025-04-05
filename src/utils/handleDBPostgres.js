@@ -43,7 +43,7 @@ async function executeQuery(query, params = []) {
 	try {
 	 client = await pool.connect();
 		const result = await client.query(query, params);
-		return result;
+		return result.rows;
 	} catch (error) {
 		logger.error('Error al ejecutar la consulta:', error);
 		throw error;
