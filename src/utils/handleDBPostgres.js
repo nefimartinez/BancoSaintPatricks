@@ -53,9 +53,9 @@ async function executeQuery(query, params = []) {
 	}
 }
 
-async function closePool() {
+ function closePool() {
 	if (pool) {
-		await pool.end();
+		 pool.end();
 		logger.info('Pool de conexiones cerrado');
 	} else {
 		logger.warn('No hay pool de conexiones para cerrar');
