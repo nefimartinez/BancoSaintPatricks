@@ -4,29 +4,16 @@ const express = require('express');
 const router = express.Router();
 const validateSchema = require('../../middlewares/validateSchemaHandler');
 
-// rutas Schemas
-const { listadoComunaSchema } = require('../../schemas/listadoComunasSchema'); // ruta de ejemplo
-
-// rutas Controllers
-const { listadoComunasController } = require('../listadoComunas/listadoComunasController'); // ruta de ejemplo
-
 // rutas servicios Mantenedor TI
 const {
 	crudUsuariosGetAllController,
 	crudUsuariosGetAllByIdController,
+	crudUsuariosCreateController,
 } = require('./crudUsuariosController');
 
-// rutas ejemplo
-router.post(
-	'/',
-	validateSchema(listadoComunaSchema, 'body'),
-	listadoComunasController,
-);
-
-// crudUsuariosALL
+// rutas crudUsuarios
 router.get('/', crudUsuariosGetAllController);
-
-// crudUsuariosById
 router.get('/:id', crudUsuariosGetAllByIdController);
+router.post('/', crudUsuariosCreateController);
 
 module.exports = router;
