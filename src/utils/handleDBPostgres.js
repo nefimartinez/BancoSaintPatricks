@@ -3,6 +3,12 @@
 const pg = require('pg');
 const logger = require('../utils/LoggerCNS').loggerCNS;
 const { configPostgresDB } = require('../../config/databases');
+const ModuleError = require('../utils/moduleError');
+const {
+	INTERNAL_ERROR,
+	NOT_FOUND,
+	BAD_REQUEST,
+} = require('../utils/constantes');
 
 // singletone pool de conexiones a PostgreSQL
 let pool = null; // Pool de conexiones a PostgreSQL
@@ -39,6 +45,24 @@ async function handleDBPostgres() {
 
 	try {
 		logger.info('Conectando a PostgreSQL...');
+
+		// healCheck para verificar la conexión
+		const healCheck = await healcheck();
+		if (healCheck.status === 'DOWN') {
+			logger.error(
+				'Chequeo de salud de la conexión postgresql: ',
+				healCheck.status,
+			);
+		}
+
+		if (healCheck.status === 'OK') {
+			logger.info(
+				'Chequeo de salud de la conexión postgresql: ',
+				healCheck.status,
+			);
+			logger.info('Fecha y hora actual en PostgreSQL:', healCheck.timestamp);
+		}
+
 		await pool.connect();
 		logger.info('Conexión a PostgreSQL exitosa');
 	} catch (error) {
@@ -68,7 +92,23 @@ async function executeQuery(query, params = []) {
 	}
 }
 
- function closePool() {
+async function healcheck() {
+	// Realiza un chequeo de salud en la conexión
+	try {
+		const { rows } = await pool.query('SELECT NOW() as current_time');
+		return {
+			status: 'OK',
+			timestamp: rows[0].current_time,
+		};
+	} catch (error) {
+		return {
+			status: 'DOWN',
+			error: error.message,
+		};
+	}
+}
+
+function closePool() {
 	if (pool) {
 		pool.end();
 		pool = null; // Limpiar la referencia al pool
