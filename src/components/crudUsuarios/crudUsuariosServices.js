@@ -49,7 +49,7 @@ module.exports.crudUsuariosCreateServices = async (body) => {
 		let query = null;
 
 		logger.info(' crudUsuariosCreateServices ');
-		query = `INSERT INTO "bancoDB"."user" (rut, nombre, apellido, email, password, rol_id, createat) VALUES ($1, $2, $3, $4, $5, $6, now()) RETURNING *;`;
+		query = `INSERT INTO "bancoDB"."user" (rut, nombre, apellido, email, password, rol_id, createdat) VALUES ($1, $2, $3, $4, $5, $6, now()) RETURNING *;`;
 
 		return await executeQuery(query, [
 			body.rut,

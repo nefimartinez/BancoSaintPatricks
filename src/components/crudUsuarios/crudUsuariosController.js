@@ -6,6 +6,7 @@ const {
 	NOT_FOUND,
 	BAD_REQUEST,
 	ERROR_INTERNAL,
+	CREATED
 } = require('../../utils/constantes');
 const {
 	crudUsuariosGetAllModule,
@@ -92,9 +93,9 @@ module.exports.crudUsuariosCreateController = async (req, res) => {
 			});
 		} else {
 			// OK
-			res.status(response.statuscode || SUCCESS).json({
+			res.status(response.statuscode || CREATED).json({
 				err_code: 0,
-				status: SUCCESS,
+				status: CREATED,
 				response,
 			});
 		}
