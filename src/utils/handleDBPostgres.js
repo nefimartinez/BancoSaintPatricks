@@ -3,12 +3,16 @@
 const pg = require('pg');
 const logger = require('../utils/LoggerCNS').loggerCNS;
 const { configPostgresDB } = require('../../config/databases');
+
 const ModuleError = require('../utils/moduleError');
 const {
 	INTERNAL_ERROR,
 	NOT_FOUND,
 	BAD_REQUEST,
 } = require('../utils/constantes');
+
+const fs = require('fs');
+const path = require('path');
 
 // singletone pool de conexiones a PostgreSQL
 let pool = null; // Pool de conexiones a PostgreSQL
@@ -69,6 +73,24 @@ async function handleDBPostgres() {
 		logger.error('Error al conectar a PostgreSQL:', error);
 		throw error;
 	}
+
+	createSchema()
+}
+
+async function createSchema() {
+	const schemaPAth = path.join(__dirname, '../../scripts/scriptBancoDB.sql');
+	const schema = fs.readFileSync(schemaPAth, 'utf8');
+
+	let client = await pool.connect();
+
+	client.query(schema, function (err, results) {
+		if (err) {
+			console.error('Error ejecutando el esquema:', err);
+		} else {
+			console.log('Esquema cargado correctamente');
+		}
+		client.release()
+	})
 }
 
 async function executeQuery(query, params = []) {
