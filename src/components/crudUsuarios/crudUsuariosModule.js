@@ -34,8 +34,8 @@ module.exports.crudUsuariosGetAllModule = async () => {
 				email: user.email || '',
 				password: user.password || '',
 				rol_id: user.rol_id,
-				createdAt: user.createat || '',
-				updatedAt: user.updateat || '',
+				createdAt: user.createdat || '',
+				updatedAt: user.updatedat || '',
 			};
 			lista.push(dato);
 		}
@@ -76,8 +76,8 @@ module.exports.crudUsuariosAllByIdModule = async (id) => {
 				email: user.email || '',
 				password: user.password || '',
 				rol_id: user.rol_id,
-				createdAt: user.createat || '',
-				updatedAt: user.updateat || '',
+				createdAt: user.createdat || '',
+				updatedAt: user.updatedat || '',
 			};
 			lista.push(dato);
 		}
