@@ -65,3 +65,39 @@ module.exports.crudUsuariosCreateServices = async (body) => {
 		throw error;
 	}
 };
+
+// service find useByEmail
+module.exports.findUserByEmail = async (email) => {
+	logger.info('=============================================');
+	logger.info('  Iniciando findUserByEmailServices          ');
+	logger.info('=============================================');
+	try {
+		let query = null;
+
+		logger.info(' findUserByEmailServices ');
+		query = `SELECT * FROM "bancoDB"."user" WHERE email = $1;`;
+
+		return await executeQuery(query, [email]);
+	} catch (error) {
+		logger.error(' Error en findUserByEmailServices: ', error);
+		throw error;
+	}
+};
+
+// service findUserByRut
+module.exports.findUserByRut = async (rut) => {
+	logger.info('=============================================');
+	logger.info('  Iniciando findUserByRutServices            ');
+	logger.info('=============================================');
+	try {
+		let query = null;
+
+		logger.info(' findUserByRutServices ');
+		query = `SELECT * FROM "bancoDB"."user" WHERE rut = $1;`;
+
+		return await executeQuery(query, [rut]);
+	} catch (error) {
+		logger.error(' Error en findUserByRutServices: ', error);
+		throw error;
+	}
+};
