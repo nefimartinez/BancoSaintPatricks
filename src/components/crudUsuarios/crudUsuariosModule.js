@@ -100,17 +100,17 @@ module.exports.crudUsuariosCreateModule = async (body) => {
 	logger.info('=============================================');
 
 	try {
-		if (response) {
-			response = {
-				message: 'Registro agregado correctamente',
-			};
-		} else {
-			response = {
-				message: 'Error al agregar el registro',
-			};
-		}
+		const response = await crudUsuariosCreateServices(body);
 
-		return response;
+		let dato = {
+			id: response[0].id,
+			rut: response[0].rut || '',
+			nombre: response[0].nombre || '',
+			apellido: response[0].apellido || '',
+			email: response[0].email || '',
+		};
+
+		return dato;
 	} catch (error) {
 		if (error.statusCode) throw error; // error controlado
 		const moduleError = new ModuleError(error);
