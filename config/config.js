@@ -29,6 +29,9 @@ const config = {
 	POSTGRES_PASSWORD: addEnvParam('POSTGRES_PASSWORD', true),
 	POSTGRES_DATABASE: addEnvParam('POSTGRES_DATABASE', true),
 	POSTGRES_SCHEMA: addEnvParam('POSTGRES_SCHEMA', true),
+
+	// JWT
+	JWT_SECRET_KEY: addEnvParam('JWT_SECRET_KEY', true),
 };
 
 module.exports = { config };

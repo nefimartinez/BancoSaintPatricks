@@ -105,14 +105,13 @@ insert into "bancoDB"."rol" values(default, 'cliente', 'usuario logiado');
 -- records user--
 -- -----------------------------------------------
 --                                                                                                             123456789
-insert into "bancoDB"."user" values(default, '50530729-1', 'Maria', 'Gonzales', 'maria.gonzales@gmail.com', '25f9e794323b453885f5181f1b624d0b', 1, NOW(), null);
+insert into "bancoDB"."user" values(default, '50530729-1', 'Maria', 'Gonzales', 'maria.gonzales@gmail.com', '$2a$12$9PikddlynQLmaRBfNv2tdOh5mBAxb84jW.XijpOwkxOAOtox8AK1a', 1, NOW(), null);
 --                                                                                                                   1234567890
-insert into "bancoDB"."user" values(default, '28649715-2', 'Fulatino', 'Martinez', 'fulanito.martinez@gmail.com', 'e807f1fcf82d132f9bb018ca6738a19f', 2, NOW(), null);
---                                                                                                                    123456789
-insert into "bancoDB"."user" values(default, '28649715-3', 'Pedro', 'Hernandez', 'pedro.hernandez@gmail.com', '25f9e794323b453885f5181f1b624d0b', 2, NOW(), null);
-insert into "bancoDB"."user" values(default, '28649715-4', 'Carlitos', 'Mamani', 'carlitos.mamani@gmail.com', '25f9e794323b453885f5181f1b624d0b', 2, NOW(), null);
-insert into "bancoDB"."user" values(default, '28649715-5', 'Manuel', 'Hourvilleur', 'manuel.hourvilleur@gmail.com', '25f9e794323b453885f5181f1b624d0b', 2, NOW(), null);
-insert into "bancoDB"."user" values(default, '28649715-6', 'Daniel', 'Martinez', 'daniel.martinez@gmail.com', '25f9e794323b453885f5181f1b624d0b', 2, NOW(), null);
+insert into "bancoDB"."user" values(default, '28649715-2', 'Fulatino', 'Martinez', 'fulanito.martinez@gmail.com', '$2a$12$0HiX0.liKLLLEY3ZyNioSORtFrBdF.geANsogLZIynU650r6.1.ye', 2, NOW(), null);
+insert into "bancoDB"."user" values(default, '28649715-3', 'Pedro', 'Hernandez', 'pedro.hernandez@gmail.com', '$2a$12$0HiX0.liKLLLEY3ZyNioSORtFrBdF.geANsogLZIynU650r6.1.ye', 2, NOW(), null);
+insert into "bancoDB"."user" values(default, '28649715-4', 'Carlitos', 'Mamani', 'carlitos.mamani@gmail.com', '$2a$12$0HiX0.liKLLLEY3ZyNioSORtFrBdF.geANsogLZIynU650r6.1.ye', 2, NOW(), null);
+insert into "bancoDB"."user" values(default, '28649715-5', 'Manuel', 'Hourvilleur', 'manuel.hourvilleur@gmail.com', '$2a$12$0HiX0.liKLLLEY3ZyNioSORtFrBdF.geANsogLZIynU650r6.1.ye', 2, NOW(), null);
+insert into "bancoDB"."user" values(default, '28649715-6', 'Daniel', 'Martinez', 'daniel.martinez@gmail.com', '$2a$12$0HiX0.liKLLLEY3ZyNioSORtFrBdF.geANsogLZIynU650r6.1.ye', 2, NOW(), null);
 
 
 
