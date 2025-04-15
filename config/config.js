@@ -24,11 +24,14 @@ const config = {
 
 	// POSTGRES DB
 	POSTGRES_HOST: addEnvParam('POSTGRES_HOST', true),
-	POSTGRES_PORT: addEnvParam('POSTGRES_PORT', true),
+	POSTGRES_PORT: addEnvParam('POSTGRES_PORT', true) || 5432,
 	POSTGRES_USER: addEnvParam('POSTGRES_USER', true),
 	POSTGRES_PASSWORD: addEnvParam('POSTGRES_PASSWORD', true),
 	POSTGRES_DATABASE: addEnvParam('POSTGRES_DATABASE', true),
 	POSTGRES_SCHEMA: addEnvParam('POSTGRES_SCHEMA', true),
+
+	// JWT
+	JWT_SECRET_KEY: addEnvParam('JWT_SECRET_KEY', true),
 };
 
 module.exports = { config };

@@ -7,6 +7,7 @@ const listadoComunasRouter = require('../src/components/listadoComunas/listadoCo
 // rutas 
 const crudUsuariosRouter = require('../src/components/crudUsuarios/crudUsuariosRouter');
 const tarjetasRouter = require('../src/components/crudTarjetas/tarjetaRouter')
+const login = require('../src/components/login/loginRouter');
 
 
 function routerApi(app) {
@@ -20,7 +21,7 @@ function routerApi(app) {
 	// servicios Mantenedores TI
 	router.use('/v1/crudUsuarios', crudUsuariosRouter);
 	router.use('/v1/tarjetas', tarjetasRouter);
-
+	router.use('/v1/login', login);
 
 	// otros servicios
 
