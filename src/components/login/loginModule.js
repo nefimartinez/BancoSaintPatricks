@@ -1,4 +1,4 @@
-'use-strict';
+'use strict';
 
 const { findUserByEmail } = require('./loginService');
 const logger = require('../../utils/LoggerCNS').loggerCNS;

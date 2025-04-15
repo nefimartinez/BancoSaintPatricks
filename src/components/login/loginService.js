@@ -1,4 +1,4 @@
-'use-strict';
+'use strict';
 
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 const { executeQuery } = require('../../utils/handleDBPostgres');

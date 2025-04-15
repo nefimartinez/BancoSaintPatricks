@@ -1,4 +1,4 @@
-'use-strict';
+'use strict';
 
 const { INTERNAL_ERROR, ERROR_INTERNAL, BAD_REQUEST, SUCCESS } = require('../../utils/constantes');
 const logger = require('../../utils/LoggerCNS').loggerCNS;
