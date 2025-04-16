@@ -24,7 +24,7 @@ const config = {
 
 	// POSTGRES DB
 	POSTGRES_HOST: addEnvParam('POSTGRES_HOST', true),
-	POSTGRES_PORT: addEnvParam('POSTGRES_PORT', true) || 5432,
+	POSTGRES_PORT: addEnvParam('POSTGRES_PORT', true),
 	POSTGRES_USER: addEnvParam('POSTGRES_USER', true),
 	POSTGRES_PASSWORD: addEnvParam('POSTGRES_PASSWORD', true),
 	POSTGRES_DATABASE: addEnvParam('POSTGRES_DATABASE', true),

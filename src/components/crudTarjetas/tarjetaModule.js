@@ -7,9 +7,8 @@ const { INTERNAL_ERROR, NOT_FOUND } = require('../../utils/constantes');
 
 
 const getAllModule = async () => {
-	logger.info('=============================================');
-	logger.info('     Iniciando tarjetaModule -> getAll()     ');
-	logger.info('=============================================');
+	showLogsBanner();
+	
 	try {
 		const response = await getAllService();
 		return response;
@@ -25,4 +24,10 @@ const getAllModule = async () => {
 
 module.exports = {
 	getAllModule
+}
+
+function showLogsBanner() {
+	logger.info('=============================================');
+	logger.info('     Iniciando tarjetaModule -> getAll()     ');
+	logger.info('=============================================');
 }
