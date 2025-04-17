@@ -12,6 +12,7 @@ const {
 	crudUsuariosGetAllModule,
 	crudUsuariosAllByIdModule,
 	crudUsuariosCreateModule,
+	crudUsuariosUpdateModule
 } = require('./crudUsuariosModule');
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 
@@ -96,6 +97,37 @@ module.exports.crudUsuariosCreateController = async (req, res) => {
 			res.status(response.statuscode || CREATED).json({
 				err_code: 0,
 				status: CREATED,
+				response,
+			});
+		}
+	} catch (error) {
+		res.status(error.statusCode || INTERNAL_ERROR).json({
+			err_code: 1,
+			status: error.statusCode || INTERNAL_ERROR,
+			err_msg: error.message || ERROR_INTERNAL,
+		});
+	}
+};
+
+// servicio crudUsuariosPut
+module.exports.crudUsuariosUpdateController = async (req, res) => {
+	logger.info('=========================================');
+	logger.info('  Iniciando crudUsuariosUpdateController ');
+	logger.info('=========================================');
+	try {
+		const response = await crudUsuariosUpdateModule(req.params.id, req.body);
+		if (response.err_code === -1) {
+			// NO-OK
+			res.status(response.statuscode || BAD_REQUEST).json({
+				err_code: -1,
+				status: response.statuscode,
+				err_msg: response.err_msg,
+			});
+		} else {
+			// OK
+			res.status(response.statuscode || SUCCESS).json({
+				err_code: 0,
+				status: SUCCESS,
 				response,
 			});
 		}

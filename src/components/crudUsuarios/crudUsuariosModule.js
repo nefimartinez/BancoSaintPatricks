@@ -94,13 +94,13 @@ module.exports.crudUsuariosAllByIdModule = async (id) => {
 };
 
 // modulo crudUsuariosCreate
-module.exports.crudUsuariosCreateModule = async (body) => {
+module.exports.crudUsuariosCreateModule = async (body, id) => {
 	logger.info('=============================================');
 	logger.info('     Iniciando crudUsuariosCreateModule      ');
 	logger.info('=============================================');
 
 	try {
-		const response = await crudUsuariosCreateServices(body);
+		const response = await crudUsuariosCreateServices(body, id);
 
 		let dato = {
 			id: response[0].id,

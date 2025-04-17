@@ -1,22 +1,14 @@
 'use strict';
 
 const express = require('express');
-// ruta ejemplo
-const listadoComunasRouter = require('../src/components/listadoComunas/listadoComunasRouter');
 
-// rutas 
+// rutas
 const crudUsuariosRouter = require('../src/components/crudUsuarios/crudUsuariosRouter');
-const tarjetasRouter = require('../src/components/crudTarjetas/tarjetaRouter')
+const tarjetasRouter = require('../src/components/crudTarjetas/tarjetaRouter');
 const login = require('../src/components/login/loginRouter');
-
 
 function routerApi(app) {
 	const router = express.Router();
-
-	// servicios de ejemplo
-	router.use('/v1/comunas/listado', listadoComunasRouter);
-
-
 
 	// servicios Mantenedores TI
 	router.use('/v1/crudUsuarios', crudUsuariosRouter);
@@ -25,9 +17,7 @@ function routerApi(app) {
 
 	// otros servicios
 
-
-
-	// la ruta base de la api hola
+	// la ruta base de la api
 	app.use('/proyectoBanco', router);
 }
 
