@@ -4,10 +4,12 @@ const {
 	crudUsuariosGetAllServices,
 	crudUsuariosGetAllByIdServices,
 	crudUsuariosCreateServices,
+	findUserByRut, 
+	findUserByEmail
 } = require('./crudUsuariosServices');
 const ModuleError = require('../../utils/moduleError');
 const logger = require('../../utils/LoggerCNS').loggerCNS;
-const { INTERNAL_ERROR, NOT_FOUND } = require('../../utils/constantes');
+const { INTERNAL_ERROR, NOT_FOUND, CONFLICT } = require('../../utils/constantes');
 
 // module crudUsuariosGetAll
 module.exports.crudUsuariosGetAllModule = async () => {
@@ -94,13 +96,34 @@ module.exports.crudUsuariosAllByIdModule = async (id) => {
 };
 
 // modulo crudUsuariosCreate
-module.exports.crudUsuariosCreateModule = async (body, id) => {
+module.exports.crudUsuariosCreateModule = async (body) => {
 	logger.info('=============================================');
 	logger.info('     Iniciando crudUsuariosCreateModule      ');
 	logger.info('=============================================');
 
 	try {
-		const response = await crudUsuariosCreateServices(body, id);
+		const { rut, email } = body;
+		const rutExists = await findUserByRut(rut);
+
+		if(rutExists.length !== 0){
+			return {
+				err_code: -1,
+				status: CONFLICT,
+				err_msg: 'ERROR el rut ingresado ya existe',
+			}
+		}
+
+		const emailExists = await findUserByEmail(email);
+
+		if(emailExists.length !== 0){
+			return {
+				err_code: -1,
+				status: CONFLICT,
+				err_msg: 'ERROR el email ingresado ya existe',
+			}
+		}
+
+		const response = await crudUsuariosCreateServices(body);
 
 		let dato = {
 			id: response[0].id,
