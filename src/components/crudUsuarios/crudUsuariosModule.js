@@ -123,7 +123,7 @@ module.exports.crudUsuariosCreateModule = async (body) => {
 			}
 		}
 
-		const response = await crudUsuariosCreateServices(body, id);
+		const response = await crudUsuariosCreateServices(body);
 
 		let dato = {
 			id: response[0].id,

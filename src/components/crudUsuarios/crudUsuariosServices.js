@@ -49,7 +49,8 @@ module.exports.crudUsuariosCreateServices = async (body) => {
 		let query = null;
 
 		logger.info(' crudUsuariosCreateServices ');
-		query = `INSERT INTO "bancoDB"."user" (rut, nombre, apellido, email, password, rol_id, createdat) VALUES ($1, $2, $3, $4, $5, $6, now()) RETURNING *;`;
+		query = `INSERT INTO "bancoDB"."user" (rut, nombre, apellido, email, password, rol_id, createdat) 
+		         VALUES ($1, $2, $3, $4, $5, $6, now()) RETURNING *;`;
 
 		return await executeQuery(query, [
 			body.rut,
@@ -62,6 +63,34 @@ module.exports.crudUsuariosCreateServices = async (body) => {
 		]);
 	} catch (error) {
 		logger.error(' Error en crudUsuariosCreateServices: ', error);
+		throw error;
+	}
+};
+
+// servicio crudUsuariosUpdate
+module.exports.crudUsuariosUpdateServices = async (body, id) => {
+	logger.info('=============================================');
+	logger.info('  Iniciando crudUsuariosUpdateServices       ');
+	logger.info('=============================================');
+	try {
+		let query = null;
+
+		logger.info(' crudUsuariosUpdateServices ');
+		query = `UPDATE "bancoDB"."user" 
+		         SET rut = $1, nombre = $2, apellido = $3, email = $4, password = $5, rol_id = $6, updatedat = now() 
+		         WHERE id = $7 RETURNING *;`;
+
+		return await executeQuery(query, [
+			body.rut,
+			body.nombre,
+			body.apellido,
+			body.email,
+			body.password,
+			body.rol_id,
+			id,
+		]);
+	} catch (error) {
+		logger.error(' Error en crudUsuariosUpdateServices: ', error);
 		throw error;
 	}
 };
