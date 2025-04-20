@@ -15,5 +15,6 @@ const {
 router.get('/', crudUsuariosGetAllController);
 router.get('/:id', crudUsuariosGetAllByIdController);
 router.post('/', crudUsuariosCreateController);
+router.put('/:id', crudUsuariosCreateController);
 
 module.exports = router;

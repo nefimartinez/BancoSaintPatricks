@@ -2,16 +2,12 @@
 
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 const { executeQuery } = require('../../utils/handleDBPostgres');
-const { INTERNAL_ERROR, SUCCESS, BAD_REQUEST } = require('../../utils/constantes');
 
 const getAllService = async () => {
-	logger.info('=========================================');
-	logger.info('  Iniciando tarjetaService -> getAll()   ');
-	logger.info('=========================================');
+	showLogsBannerGetAll();
 
-    let query = null;
 	try {
-		query = `SELECT * FROM "bancoDB".cards ORDER BY balance`; 
+		const query = `SELECT * FROM "bancoDB".cards ORDER BY balance`; 
 
 		return await executeQuery(query, []);
 
@@ -19,7 +15,17 @@ const getAllService = async () => {
 		logger.error(' Error en tarjetaService -> getAll(): ', error);
 		throw error;
 	}
+
 };
+
+
+
+function showLogsBannerGetAll() {
+	logger.info('=========================================');
+	logger.info('  Iniciando tarjetaService -> getAll()   ');
+	logger.info('=========================================');
+}
+
 
 module.exports = {
     getAllService
