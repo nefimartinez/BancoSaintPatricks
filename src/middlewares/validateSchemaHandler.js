@@ -3,6 +3,7 @@
 const { BAD_REQUEST } = require('../utils/constantes');
 const logger = require('../utils/LoggerCNS').loggerCNS;
 const ModuleError = require('../utils/moduleError');
+
 const validateSchema = (schema, property) => {
 	return async (req, res, next) => {
 		try {
