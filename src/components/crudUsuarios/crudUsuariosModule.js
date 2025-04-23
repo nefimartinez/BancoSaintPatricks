@@ -17,14 +17,16 @@ module.exports.crudUsuariosGetAllModule = async () => {
 	logger.info('=============================================');
 	logger.info('     Iniciando crudUsuariosGetAllModule      ');
 	logger.info('=============================================');
+
 	try {
 		const response = await crudUsuariosGetAllServices();
 
 		if (response.length === 0) {
-			const moduleError = new ModuleError();
-			moduleError.statusCode = NOT_FOUND;
-			moduleError.err_msg = 'No se encontró el registro';
-			throw moduleError;
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: 'No se encontraron registros',
+			};
 		}
 
 		const lista = [];
@@ -59,6 +61,7 @@ module.exports.crudUsuariosAllByIdModule = async (id) => {
 	logger.info('=============================================');
 	logger.info('     Iniciando crudUsuariosAllByIdModule     ');
 	logger.info('=============================================');
+
 	try {
 		// validacion de entrada con JOI
 		const { error } = await idCrudUsuarioSchema.validate(
@@ -78,10 +81,11 @@ module.exports.crudUsuariosAllByIdModule = async (id) => {
 		const response = await crudUsuariosGetAllByIdServices(id);
 
 		if (response.length === 0) {
-			const moduleError = new ModuleError();
-			moduleError.statusCode = NOT_FOUND;
-			moduleError.err_msg = 'No se encontró el registro';
-			throw moduleError;
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: 'No se encontraron registros',
+			};
 		}
 
 		// registro encontrado

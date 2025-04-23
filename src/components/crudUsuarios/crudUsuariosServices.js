@@ -2,13 +2,13 @@
 
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 const { executeQuery } = require('../../utils/handleDBPostgres');
-const ModuleError = require('../../utils/moduleError');
 
 // servicio crudUsuariosGetAll
 module.exports.crudUsuariosGetAllServices = async () => {
 	logger.info('=========================================');
 	logger.info('  Iniciando crudUsuariosGetAllServices   ');
 	logger.info('=========================================');
+
 	try {
 		let query = null;
 
@@ -27,6 +27,7 @@ module.exports.crudUsuariosGetAllByIdServices = async (id) => {
 	logger.info('=============================================');
 	logger.info('  Iniciando crudUsuariosGetAllByIdServices   ');
 	logger.info('=============================================');
+
 	try {
 		let query = null;
 
@@ -45,6 +46,7 @@ module.exports.crudUsuariosCreateServices = async (body) => {
 	logger.info('=============================================');
 	logger.info('  Iniciando crudUsuariosCreateServices       ');
 	logger.info('=============================================');
+
 	try {
 		let query = null;
 
@@ -72,6 +74,7 @@ module.exports.crudUsuariosUpdateServices = async (body, id) => {
 	logger.info('=============================================');
 	logger.info('  Iniciando crudUsuariosUpdateServices       ');
 	logger.info('=============================================');
+
 	try {
 		let query = null;
 
@@ -100,6 +103,7 @@ module.exports.findUserByEmail = async (email) => {
 	logger.info('=============================================');
 	logger.info('  Iniciando findUserByEmailServices          ');
 	logger.info('=============================================');
+
 	try {
 		let query = null;
 
@@ -118,6 +122,7 @@ module.exports.findUserByRut = async (rut) => {
 	logger.info('=============================================');
 	logger.info('  Iniciando findUserByRutServices            ');
 	logger.info('=============================================');
+
 	try {
 		let query = null;
 

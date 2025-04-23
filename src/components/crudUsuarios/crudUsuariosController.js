@@ -53,8 +53,7 @@ module.exports.crudUsuariosGetAllByIdController = async (req, res) => {
 	logger.info('  Iniciando crudUsuariosGetAllByIdController ');
 	logger.info('=============================================');
 	try {
-		const response = await crudUsuariosAllByIdModule(req.params.id);
-		logger.info('response: ', response);
+		const response = await crudUsuariosAllByIdModule(req.params.id);		
 		if (response.err_code === -1) {
 			// NO-OK
 			res.status(response.statusCode || BAD_REQUEST).json({
