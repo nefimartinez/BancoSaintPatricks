@@ -4,7 +4,6 @@ const pg = require('pg');
 const logger = require('../utils/LoggerCNS').loggerCNS;
 const { configPostgresDB } = require('../../config/databases');
 
-const ModuleError = require('../utils/moduleError');
 const {
 	INTERNAL_ERROR,
 	NOT_FOUND,
@@ -74,7 +73,7 @@ async function handleDBPostgres() {
 		throw error;
 	}
 
-	createSchema()
+	createSchema();
 }
 
 async function createSchema() {
@@ -85,12 +84,12 @@ async function createSchema() {
 
 	client.query(schema, function (err, results) {
 		if (err) {
-			console.error('Error ejecutando el esquema:', err);
+			logger.error('Error ejecutando el esquema:', err);
 		} else {
-			console.log('Esquema cargado correctamente');
+			logger.info('Esquema cargado correctamente');
 		}
-		client.release()
-	})
+		client.release();
+	});
 }
 
 async function executeQuery(query, params = []) {
