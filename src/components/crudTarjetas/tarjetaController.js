@@ -113,7 +113,7 @@ const updateCardController = async (req, res) => {
 	logger.info('============================================');
 
 	try {
-		const response = await updateCardModule(req.params.id, req.body);
+		const response = await updateCardModule( req.body , req.params.id);
 		if (response.err_code === -1) {
 			// NO-OK
 			res.status(response.statusCode || BAD_REQUEST).json({

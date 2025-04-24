@@ -35,9 +35,11 @@ const getIdService = async (id) => {
 };
 //service crateCardService
 const createCardService = async (body) => {
+
 	showLogsBanner('Iniciando tarjetaService ->  createCard()');
 
 	try {
+	
 		const query = `INSERT INTO "bancoDB"."cards" (card_number,pin,balance,user_id, createdat) 
 		         VALUES ($1, $2, $3, $4, now()) RETURNING *;`; 
 

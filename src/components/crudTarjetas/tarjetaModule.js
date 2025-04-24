@@ -8,8 +8,9 @@ const {
 	deleteCardService 
 } = require('./tarjetaService');
 const ModuleError = require('../../utils/moduleError');
+const idCrudUsuarioSchema = require('../../schemas/crudUsuarioSchema');
 const logger = require('../../utils/LoggerCNS').loggerCNS;
-const { INTERNAL_ERROR } = require('../../utils/constantes');
+const { INTERNAL_ERROR,NOT_FOUND } = require('../../utils/constantes');
 
 
 
@@ -20,6 +21,13 @@ const getAllModule = async () => {
 
 	try {
 		const response = await getAllService();
+		if (response.length === 0) {
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: 'No se encontraron registros de tarjetas',
+			};
+		}
 		return response;
 	} catch (error) {
 		if (error.statusCode) throw error; // error controlado
@@ -32,13 +40,39 @@ const getAllModule = async () => {
 };
 
 //module getIdModule
-const getIdModule = async () => {
+const getIdModule = async (id) => {
 
 	showBanner('      Iniciando tarjetaModule -> getId()     ');
 
 	try {
-		const response = await getIdService();
+			// validacion de entrada con JOI
+		const { error } = await idCrudUsuarioSchema.validate(
+			{ id },
+			{ abortEarly: false }, // abortEarly: false para que devuelva todos los errores
+		);
+
+		if (error) {
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: error.details[0].message,
+			};
+		}
+		//end JOI
+
+		//getIdService
+		const response = await getIdService(id);
+		
+		if (response.length === 0) {
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: 'No se encontro registro de tarjeta por id',
+			};
+		}
+		
 		return  response;
+
 	} catch (error) {
 		if (error.statusCode) throw error; // error controlado
 		const moduleError = new ModuleError(error);
@@ -50,13 +84,23 @@ const getIdModule = async () => {
 };
 
 //module createCardModule
-const createCardModule = async () => {
+const createCardModule = async (body) => {
 
 	showBanner('   Iniciando tarjetaModule -> createCard()   ');
 
 	try {
-		const response = await createCardService();
+			//falta ver si existe la tarjeta
+
+		const response = await createCardService(body);
+		if (response.length === 0) {
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: 'No se pudo crear tarjeta',
+			};
+		}
 		return response;
+
 	} catch (error) {
 		if (error.statusCode) throw error; // error controlado
 		const moduleError = new ModuleError(error);
@@ -68,12 +112,34 @@ const createCardModule = async () => {
 };
 
 //module updateCardModule
-const updateCardModule = async () => {
+const updateCardModule = async (body, id) => {
 
 	showBanner('   Iniciando tarjetaModule -> updateCard()   ');
 
 	try {
-		const response = await updateCardService();
+		// validacion de entrada con JOI
+		const { error } = await idCrudUsuarioSchema.validate(
+			{ id },
+			{ abortEarly: false }, // abortEarly: false para que devuelva todos los errores
+		);
+
+		if (error) {
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: error.details[0].message,
+			};
+		}
+		//end JOI
+
+		const response = await updateCardService(body,id);
+		if (response.length === 0) {
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: 'No se encontro registro de tarjeta, para actualizar',
+			};
+		}
 		return response;
 	} catch (error) {
 		if (error.statusCode) throw error; // error controlado
@@ -86,12 +152,36 @@ const updateCardModule = async () => {
 };
 
 //module deleteCardModule
-const deleteCardModule = async () => {
+const deleteCardModule = async (id) => {
 
 	showBanner('   Iniciando tarjetaModule -> deleteCard()   ');
 
 	try {
-		const response = await deleteCardService();
+		// validacion de entrada con JOI
+		const { error } = await idCrudUsuarioSchema.validate(
+			{ id },
+			{ abortEarly: false }, // abortEarly: false para que devuelva todos los errores
+		);
+
+		if (error) {
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: error.details[0].message,
+			};
+		}
+		//end JOI
+
+		//deleteCardService
+		const response = await deleteCardService(id);
+		
+		if (response.length === 0) {
+			return {
+				err_code: -1,
+				statusCode: NOT_FOUND,
+				err_msg: 'No se encontró registro de tarjeta, así que no se elimino nada',
+			};
+		}
 		return response;
 	} catch (error) {
 		if (error.statusCode) throw error; // error controlado
