@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "77ec4c66-b5c3-4bb5-8a41-54de4ae52526",
+		"name": "Crud  Tarjetas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44225975",
+		"_collection_link": "https://exequiel-168483.postman.co/workspace/Exequiel's-Workspace~4d403c90-ff3f-4f86-853b-85e1eecd1cad/collection/44225975-77ec4c66-b5c3-4bb5-8a41-54de4ae52526?action=share&source=collection_link&creator=44225975"
+	},
+	"item": [
+		{
+			"name": "Obtener tarjetas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/proyectoBanco/v1/crudTarjetas/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"proyectoBanco",
+						"v1",
+						"crudTarjetas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener una Tarjeta",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/proyectoBanco/v1/crudTarjetas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"proyectoBanco",
+						"v1",
+						"crudTarjetas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Tarjeta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"card_number\": \"5595-3458-9989-7199\",\r\n    \"pin\": \"2525\",\r\n    \"balance\": 50,\r\n    \"user_id\": 2\r\n    \r\n\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/proyectoBanco/v1/crudTarjetas/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"proyectoBanco",
+						"v1",
+						"crudTarjetas",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Tarjeta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"card_number\": \"5595-3458-9989-7199\",\r\n    \"pin\": \"2525\",\r\n    \"balance\": 50,\r\n    \"user_id\": 2\r\n    \r\n\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/proyectoBanco/v1/crudTarjetas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"proyectoBanco",
+						"v1",
+						"crudTarjetas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Tarjeta",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/proyectoBanco/v1/crudTarjetas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"proyectoBanco",
+						"v1",
+						"crudTarjetas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
