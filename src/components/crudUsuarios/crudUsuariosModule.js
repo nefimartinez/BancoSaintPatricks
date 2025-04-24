@@ -6,13 +6,13 @@ const {
 	crudUsuariosCreateServices,
 	crudUsuariosUpdateServices,
 	crudUsuariosDeleteServices,
-	findUserByRut, 
+	findUserByRut,
 	findUserByEmail
 } = require('./crudUsuariosServices');
-const idCrudUsuarioSchema = require('../../schemas/crudUsuarioSchema');
+const schemas = require('../../schemas/crudUsuarioSchema');
 const ModuleError = require('../../utils/moduleError');
 const logger = require('../../utils/LoggerCNS').loggerCNS;
-const { INTERNAL_ERROR, NOT_FOUND, CONFLICT } = require('../../utils/constantes');
+const { INTERNAL_ERROR, NOT_FOUND, CONFLICT, BAD_REQUEST } = require('../../utils/constantes');
 
 // module crudUsuariosGetAll
 module.exports.crudUsuariosGetAllModule = async () => {
@@ -66,7 +66,7 @@ module.exports.crudUsuariosAllByIdModule = async (id) => {
 
 	try {
 		// validacion de entrada con JOI
-		const { error } = await idCrudUsuarioSchema.validate(
+		const { error } = await schemas.idCrudUsuarioSchema.validate(
 			{ id },
 			{ abortEarly: false }, // abortEarly: false para que devuelva todos los errores
 		);
@@ -128,10 +128,25 @@ module.exports.crudUsuariosCreateModule = async (body) => {
 	logger.info('=============================================');
 
 	try {
+
+		// validacion de entrada con JOI
+		const { error } = await schemas.crudUsuarioSchema.validate(
+			body,
+			{ abortEarly: false }, // abortEarly: false para que devuelva todos los errores
+		);
+
+		if (error) {
+			return {
+				err_code: -1,
+				statusCode: BAD_REQUEST,
+				err_msg: error.details[0].message,
+			};
+		}
+
 		const { rut, email } = body;
 		const rutExists = await findUserByRut(rut);
 
-		if(rutExists.length !== 0){
+		if (rutExists.length !== 0) {
 			return {
 				err_code: -1,
 				status: CONFLICT,
@@ -141,7 +156,7 @@ module.exports.crudUsuariosCreateModule = async (body) => {
 
 		const emailExists = await findUserByEmail(email);
 
-		if(emailExists.length !== 0){
+		if (emailExists.length !== 0) {
 			return {
 				err_code: -1,
 				status: CONFLICT,

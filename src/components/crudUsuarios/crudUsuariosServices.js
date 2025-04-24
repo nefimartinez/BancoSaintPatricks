@@ -2,6 +2,8 @@
 
 const logger = require('../../utils/LoggerCNS').loggerCNS;
 const { executeQuery } = require('../../utils/handleDBPostgres');
+const hashPassword = require('../../utils/hashPassword');
+const RolesId = require('../../utils/roles')
 
 // servicio crudUsuariosGetAll
 module.exports.crudUsuariosGetAllServices = async () => {
@@ -50,6 +52,8 @@ module.exports.crudUsuariosCreateServices = async (body) => {
 	try {
 		let query = null;
 
+		const hashedPassword = await hashPassword(body.password);
+
 		logger.info(' crudUsuariosCreateServices ');
 		query = `INSERT INTO "bancoDB"."user" (rut, nombre, apellido, email, password, rol_id, createdat) 
 		         VALUES ($1, $2, $3, $4, $5, $6, now()) RETURNING *;`;
@@ -59,8 +63,8 @@ module.exports.crudUsuariosCreateServices = async (body) => {
 			body.nombre,
 			body.apellido,
 			body.email,
-			body.password,
-			body.rol_id,
+			hashedPassword,
+			RolesId.USER
 			//new Date().toISOString(),
 		]);
 	} catch (error) {
