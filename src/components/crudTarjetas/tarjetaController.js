@@ -103,7 +103,7 @@ const createCardController = async (req, res) => {
 			status: error.statusCode || INTERNAL_ERROR,
 			err_msg: error.message || ERROR_INTERNAL,
 		});
-	}
+	} 
 };
 
 // servicio updateCard
