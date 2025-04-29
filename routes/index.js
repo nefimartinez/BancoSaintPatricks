@@ -12,7 +12,7 @@ function routerApi(app) {
 
 	// servicios Mantenedores TI
 	router.use('/v1/crudUsuarios', crudUsuariosRouter);
-	router.use('/v1/tarjetas', tarjetasRouter);
+	router.use('/v1/crudTarjetas', tarjetasRouter);
 	router.use('/v1/login', login);
 
 	// otros servicios
